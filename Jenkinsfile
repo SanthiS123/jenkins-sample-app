@@ -7,23 +7,23 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/<your-username>/jenkins-sample-app.git'
+                git 'https://github.com/SanthiS123/jenkins-sample-app.git'  
             }
         }
         stage('Build') {
             steps {
-                sh 'docker build -t $IMAGE_NAME:$BUILD_NUMBER .'
+                sh 'docker build -t Myfirstpipeline:mypipeline0.1 .'
             }
         }
         stage('Push') {
             steps {
                 sh "echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin"
-                sh 'docker push $IMAGE_NAME:$BUILD_NUMBER'
+                sh 'docker push Myfirstpipeline:mypipeline0.1'
             }
         }
         stage('Deploy') {
             steps {
-                sh 'docker run -d -p 5000:5000 --name sampleapp $IMAGE_NAME:$BUILD_NUMBER'
+                sh 'docker run -d -p 5000:5000 --name myfirstapp Myfirstpipeline:mypipeline0.1'
             }
         }
     }
