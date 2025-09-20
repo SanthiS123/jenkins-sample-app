@@ -4,12 +4,7 @@ pipeline {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub-creds')
         IMAGE_NAME = "santhi311/jenkins-sample-app" // replace with your DockerHub username
     }
-    stages {
-        stage('Checkout') {
-            steps {
-                git 'https://github.com/SanthiS123/jenkins-sample-app.git'
-            }
-        }
+   
         stage('Build') {
             steps {
                 sh 'docker build -t $IMAGE_NAME:$BUILD_NUMBER .'
